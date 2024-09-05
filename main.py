@@ -1,0 +1,1 @@
+push_update_code = "alembic revision --autogenerate -m change paasword column"
