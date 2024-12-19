@@ -1,3 +1,5 @@
 .venv/
 .env.development
+.env.production
+.env.staging
 __pycache__
