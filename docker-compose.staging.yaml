@@ -1,0 +1,9 @@
+
+services:
+  web:
+    build: .
+    command: sh -c "fastapi run src/"
+    env_file:
+      - .env.staging
+    ports:
+      - "8000:8000"
