@@ -4,6 +4,7 @@ import jwt
 from src.config import Config
 import uuid
 import logging
+from typing import Optional
 from itsdangerous import URLSafeTimedSerializer
 
 password_context = CryptContext(
@@ -12,9 +13,11 @@ password_context = CryptContext(
 
 ACCESS_TOKEN_EXPIRY = 3600
 
+
 def generate_hash(password: str) -> str:
     hashed_password = password_context.hash(password)
     return hashed_password
+
 
 def verify_password(password: str, hashed_p: str) -> bool:
     return password_context.verify(password, hashed_p)
@@ -40,7 +43,7 @@ def create_access_token(user_data: dict, expiry: timedelta = None, refresh: bool
     return token
 
 
-def decode_token(token: str) -> dict | None:
+def decode_token(token: str) -> Optional[dict]:
     try:
         token_data = jwt.decode(token, key=Config.JWT_SECRET, algorithms=[Config.JWT_ALGORITHM])
         return token_data
@@ -48,10 +51,12 @@ def decode_token(token: str) -> dict | None:
         logging.exception(e)
         return None
 
+
 serializer = URLSafeTimedSerializer(
         secret_key=Config.JWT_SECRET,
         salt="email-configuration"
 )
+
 
 def create_url_safe_token(data: dict):
 

@@ -1,5 +1,3 @@
-
-
 from fastapi import APIRouter, Depends, status
 from fastapi.exceptions import HTTPException
 from src.db.models import User
@@ -11,6 +9,7 @@ from src.auth.dependencies import get_current_user
 
 review_router = APIRouter()
 review_service = ReviewService()
+
 
 @review_router.post('/book/{book_uid}')
 async def add_review_to_book(

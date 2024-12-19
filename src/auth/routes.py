@@ -39,6 +39,7 @@ async def send_mail(emails: EmailModel):
     await fm.send_message(message)
     return {"message": "Email sent successfully"}
 
+
 @auth_router.post(
     '/signup',
     status_code=status.HTTP_201_CREATED,
@@ -69,7 +70,7 @@ async def create_user_account(
         )
 
         # await fm.send_message(message)
-        bg_tasks.add_task(fm.send_message,message)
+        bg_tasks.add_task(fm.send_message, message)
 
         return {
             "message": "Account created! Check email to verify your account. ",
